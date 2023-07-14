@@ -8,13 +8,17 @@
     "start": "npx rimraf build && npx tsc && node ./build/app.js",
     "clean": "npx rimraf build",
     "build": "npx rimraf build && npx tsc",
-    "test": "npx rimraf build && npx tsc && jasmine",
+    "migrate:up":"db-migrate up",
+    "migrate:down":"db-migrate reset",
+    "test": "export NODE_ENV=test && npm run build  && db-migrate up --env test &&  npx tsc && jasmine && db-migrate reset --env test && npm run clean ",
     "format": "npx prettier --write 'src/**/*.{ts,js}' ",
     "lint": "npx eslint . --ext .ts"
   },
   "keywords": [],
   "license": "ISC",
   "dependencies": {
+    "db-migrate": "^0.11.13",
+    "db-migrate-pg": "^1.3.0",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "helmet": "^7.0.0",
