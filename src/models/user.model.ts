@@ -8,7 +8,7 @@ class UserModel{
 async getAllUsers():Promise<User[]>{
     try {
         const connection = await Client.connect()
-        const sqlQuery = `SELECT * FROM users;`
+        const sqlQuery = `SELECT user_id,username,email,first_name,last_name,created_at,updated_at FROM users;`
         const queryResult = await connection.query(sqlQuery)
         connection.release()
         return queryResult.rows
@@ -21,7 +21,7 @@ async getAllUsers():Promise<User[]>{
   async getUserById(user_id:string):Promise<User>{
     try {
         const connection = await Client.connect()
-        const sqlQuery = `SELECT * FROM users WHERE user_id=$1;`
+        const sqlQuery = `SELECT user_id,username,email,first_name,last_name,created_at,updated_at FROM users WHERE user_id=$1;`
         const queryResult = await connection.query(sqlQuery,[user_id])
         connection.release()
         return queryResult.rows[0]
