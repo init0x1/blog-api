@@ -86,7 +86,7 @@ async getAllUsers():Promise<User[]>{
 
 //user login (auth)
 
-async authentication(username:string,password:string):Promise<string | false>{
+async authenticate(username:string,password:string):Promise<string | false>{
     try {
         const connection = await Client.connect()
       const sqlQuery = 'SELECT password FROM users WHERE username=$1;'
@@ -101,6 +101,5 @@ async authentication(username:string,password:string):Promise<string | false>{
         throw new Error(`Error while User Login !!`)
     }
 }
-
 }
-
+export {UserModel}
