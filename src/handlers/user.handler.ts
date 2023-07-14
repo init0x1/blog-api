@@ -54,7 +54,7 @@ export const createUser=async(req:Request,res:Response):Promise<void>=>{
             last_name
         }
         const newUser:User = await userModel.createUser(user)
-        const userToken = generateToken(user.user_id as string)
+        const userToken = generateToken(newUser.user_id as string)
         res.status(200).json({newUser,userToken})
     } catch (error) {
         res.status(400).json({error:'error while creating User'})
@@ -90,16 +90,16 @@ export const UpdateUser = async (req: Request, res: Response): Promise<void> => 
   //delete User
   export const deleteUser = async (req: Request, res: Response): Promise<void> => {
     try {
-      const user_Id = req.params.user_id as string
-      if (!user_Id) {
+      const user_id = req.params.user_id as string
+      if (!user_id) {
         res.status(400).json({ message: 'User ID is required' })
         return
       }
-      if (!(await userModel.getUserById(user_Id))) {
+      if (!(await userModel.getUserById(user_id))) {
         res.status(404).json({ error: 'user not found' })
         return
       }
-      await userModel.delete(user_Id)
+      await userModel.delete(user_id)
   
       res.status(200).json('user deleted')
     } catch (error) {

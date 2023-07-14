@@ -75,7 +75,7 @@ async getAllUsers():Promise<User[]>{
  async delete(user_id: string): Promise<User> {
     try {
       const connection = await Client.connect()
-      const sqlQuery = `DELETE FROM users WHERE user_id=($1) RETURNING user_id,username,email,first_name,last_name,created_at ;`
+      const sqlQuery = `DELETE FROM users WHERE user_id= $1 RETURNING user_id,username,email,first_name,last_name,created_at ;`
       const queryResult = await connection.query(sqlQuery, [user_id])
       connection.release()
       return queryResult.rows[0]

@@ -1,6 +1,7 @@
 import express, { Router } from 'express'
 import { welcomeMessage, notFound } from '../controllers/'
 import { join } from 'path'
+import { userRouter } from './api/user.Router'
 
 //Declareing Static Directory for Serving Static Files
 
@@ -17,6 +18,9 @@ router.use('/static', express.static(staticDir))
 // Welcome Message With / EndPoint
 
 router.get('/', welcomeMessage)
+
+//using userRouter
+router.use('/users',userRouter)
 
 // Response With Not Found for any invalid path
 
