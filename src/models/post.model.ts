@@ -1,41 +1,41 @@
-import Client from "../database";
-import { Post } from "../types/PostTypes";
+import Client from '../database'
+import { Post } from '../types/PostTypes'
 
-class PostModel{
-    //get All Posts
-    async getAllPosts():Promise<Post[]>{
-        try {
-            const connection = await Client.connect()
-            const sqlQuery = `SELECT * FROM posts;`
-            const queryResult = await connection.query(sqlQuery)
-            return queryResult.rows
-        } catch (error) {
-            throw new Error(`Error while getting posts: ${error}`)
-        }
+class PostModel {
+  //get All Posts
+  async getAllPosts(): Promise<Post[]> {
+    try {
+      const connection = await Client.connect()
+      const sqlQuery = `SELECT * FROM posts;`
+      const queryResult = await connection.query(sqlQuery)
+      return queryResult.rows
+    } catch (error) {
+      throw new Error(`Error while getting posts: ${error}`)
     }
-    //get Posts by user_id
-    async getPostsByUser(user_id:string):Promise<Post[]>{
-        try {
-            const connection = await Client.connect()
-            const sqlQuery = `SELECT * FROM posts WHERE user_id = $1;`
-            const queryResult = await connection.query(sqlQuery,[user_id])
-            return queryResult.rows
-        } catch (error) {
-            throw new Error(`Error while getting user:${user_id} posts: ${error}`)
-        }
+  }
+  //get Posts by user_id
+  async getPostsByUser(user_id: string): Promise<Post[]> {
+    try {
+      const connection = await Client.connect()
+      const sqlQuery = `SELECT * FROM posts WHERE user_id = $1;`
+      const queryResult = await connection.query(sqlQuery, [user_id])
+      return queryResult.rows
+    } catch (error) {
+      throw new Error(`Error while getting user:${user_id} posts: ${error}`)
     }
-    //get  Post by post_id
-    async getPostByPostId(post_id:string):Promise<Post>{
-        try {
-            const connection = await Client.connect()
-            const sqlQuery = `SELECT * FROM posts WHERE post_id = $1;`
-            const queryResult = await connection.query(sqlQuery,[post_id])
-            return queryResult.rows[0]
-        } catch (error) {
-            throw new Error(`Error while getting post:${post_id} ${error}`)
-        }
+  }
+  //get  Post by post_id
+  async getPostByPostId(post_id: string): Promise<Post> {
+    try {
+      const connection = await Client.connect()
+      const sqlQuery = `SELECT * FROM posts WHERE post_id = $1;`
+      const queryResult = await connection.query(sqlQuery, [post_id])
+      return queryResult.rows[0]
+    } catch (error) {
+      throw new Error(`Error while getting post:${post_id} ${error}`)
     }
-      // create post
+  }
+  // create post
   async create(post: Post): Promise<Post> {
     try {
       const connection = await Client.connect()
@@ -69,8 +69,8 @@ class PostModel{
       throw new Error(`Error while updating post: ${post.post_id}: ${error}`)
     }
   }
-// delete post
-async delete(post_id: string): Promise<Post> {
+  // delete post
+  async delete(post_id: string): Promise<Post> {
     try {
       const connection = await Client.connect()
       const sql_query = `DELETE FROM posts WHERE post_id = $1  RETURNING * ;`
@@ -83,4 +83,4 @@ async delete(post_id: string): Promise<Post> {
   }
 }
 
-export{PostModel}
+export { PostModel }

@@ -23,9 +23,11 @@ export const getAllPosts = async (req: Request, res: Response): Promise<void> =>
 export const getPostById = async (req: Request, res: Response): Promise<void> => {
   try {
     const postId = req.params.post_id as string
-   // const userId = req.params.user_id as string
-    if (!postId ) {
-      res.status(400).json({ error: 'Missing/Invalid parameters, the following parameters are required:post_id ' })
+    // const userId = req.params.user_id as string
+    if (!postId) {
+      res.status(400).json({
+        error: 'Missing/Invalid parameters, the following parameters are required:post_id '
+      })
       return
     }
     const post: Post = await postModel.getPostByPostId(postId)
@@ -44,7 +46,9 @@ export const getUserPostes = async (req: Request, res: Response): Promise<void> 
   try {
     const userId = req.params.user_id as string
     if (!userId) {
-      res.status(400).json({ error: 'Missing/Invalid parameters, the following parameters are required: user_id' })
+      res.status(400).json({
+        error: 'Missing/Invalid parameters, the following parameters are required: user_id'
+      })
       return
     }
     if (!(await usermodel.getUserById(userId as string))) {
@@ -71,7 +75,10 @@ export const createPost = async (req: Request, res: Response): Promise<void> => 
       post_content: req.body.post_content as string
     }
     if (!post.user_id || !post.title || !post.post_content) {
-      res.status(400).json({ error: 'Missing/Invalid parameters, the following parameters are required: user_id, title, post_content' })
+      res.status(400).json({
+        error:
+          'Missing/Invalid parameters, the following parameters are required: user_id, title, post_content'
+      })
       return
     }
     if (!(await usermodel.getUserById(post.user_id as string))) {
@@ -88,14 +95,17 @@ export const createPost = async (req: Request, res: Response): Promise<void> => 
 //update post
 export const updatePost = async (req: Request, res: Response): Promise<void> => {
   try {
-    const post:Post={
-        post_id : req.params.post_id as string,
-        user_id :req.body.user_id as string,
-        title : req.body.title as string,
-        post_content : req.body.post_content as string
+    const post: Post = {
+      post_id: req.params.post_id as string,
+      user_id: req.body.user_id as string,
+      title: req.body.title as string,
+      post_content: req.body.post_content as string
     }
-    if (!post.post_id ||!post.user_id ||!post.title || !post.post_content ) {
-      res.status(400).json({ error: 'Missing/Invalid parameters, the following parameters are required: post_i,user_id,title,post_content' })
+    if (!post.post_id || !post.user_id || !post.title || !post.post_content) {
+      res.status(400).json({
+        error:
+          'Missing/Invalid parameters, the following parameters are required: post_i,user_id,title,post_content'
+      })
       return
     }
     if (!(await postModel.getPostByPostId(post.post_id as string))) {
@@ -106,7 +116,7 @@ export const updatePost = async (req: Request, res: Response): Promise<void> => 
       res.status(404).json({ error: 'User Not Found' })
       return
     }
-     const updatedPost: Post = await postModel.update(post)
+    const updatedPost: Post = await postModel.update(post)
     res.status(200).json({ updatedPost })
   } catch (error) {
     res.status(400).json({ error: 'Error While Updateing Post' })
@@ -120,7 +130,10 @@ export const deletePost = async (req: Request, res: Response): Promise<void> => 
     const user_id = req.body.user_id as string
 
     if (!post_id || !user_id) {
-      res.status(400).json({ error: 'Missing/Invalid parameters, the following parameters are required: post_id , user_id' })
+      res.status(400).json({
+        error:
+          'Missing/Invalid parameters, the following parameters are required: post_id , user_id'
+      })
       return
     }
     if (!(await postModel.getPostByPostId(post_id))) {

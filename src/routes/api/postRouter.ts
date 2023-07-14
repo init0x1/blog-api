@@ -1,11 +1,11 @@
 import { Router } from 'express'
 import {
- getAllPosts,
- getPostById,
- getUserPostes,
- createPost,
- updatePost,
- deletePost
+  getAllPosts,
+  getPostById,
+  getUserPostes,
+  createPost,
+  updatePost,
+  deletePost
 } from '../../handlers/post.handler'
 import { validateTokenMiddleware } from '../../middlewares/authenrication.middleware'
 const postRouter: Router = Router()

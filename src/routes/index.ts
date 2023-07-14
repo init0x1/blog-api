@@ -21,10 +21,10 @@ router.use('/static', express.static(staticDir))
 router.get('/', welcomeMessage)
 
 //using userRouter
-router.use('/users',userRouter)
+router.use('/users', userRouter)
 
 //using postRouter
-router.use('/posts',postRouter)
+router.use('/posts', postRouter)
 
 // Response With Not Found for any invalid path
 

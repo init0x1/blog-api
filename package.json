@@ -12,7 +12,8 @@
     "migrate:down": "db-migrate reset",
     "test": "export NODE_ENV=test && npm run build  && db-migrate up --env test &&  npx tsc && jasmine && db-migrate reset --env test && npm run clean ",
     "format": "npx prettier --write 'src/**/*.{ts,js}' ",
-    "lint": "npx eslint . --ext .ts"
+    "lint": "npx eslint . --ext .ts",
+    "lint:fix":"npx eslint . --ext .ts --fix"
   },
   "keywords": [],
   "license": "ISC",
