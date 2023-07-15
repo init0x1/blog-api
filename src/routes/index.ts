@@ -3,6 +3,7 @@ import { welcomeMessage, notFound } from '../controllers/'
 import { join } from 'path'
 import { userRouter } from './api/user.Router'
 import { postRouter } from './api/postRouter'
+import { commentRouter } from './api/commentRouter'
 
 //Declareing Static Directory for Serving Static Files
 
@@ -25,6 +26,9 @@ router.use('/users', userRouter)
 
 //using postRouter
 router.use('/posts', postRouter)
+
+//using postRouter
+router.use('/comments', commentRouter)
 
 // Response With Not Found for any invalid path
 
